@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "AMD",
+    "jsx": "react",
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "target": "ES2018"
+  },
+  "include": [
+    "./assets/js/**/*"
+  ]
+}

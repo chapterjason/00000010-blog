@@ -1,0 +1,51 @@
+version: '3.7'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: development
+    networks:
+      - appnet
+    volumes:
+      - './:/app'
+    command: sh -c 'yarn run backend:start'
+    ports:
+      - "${APP_PORT}:3000"
+    expose:
+      - "${APP_PORT}"
+    depends_on:
+      - database
+      - frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: development
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    networks:
+      - appnet
+    volumes:
+      - './assets:/app/assets'
+      - './public:/app/public'
+    command: sh -c 'yarn run frontend:dev:server --hot --public http://localhost:8080 --host 0.0.0.0'
+  database:
+    image: mysql:5.7
+    restart: always
+    networks:
+      - appnet
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+    environment:
+      MYSQL_DATABASE: 'test'
+      MYSQL_USER: 'test'
+      MYSQL_PASSWORD: 'test'
+      MYSQL_ROOT_PASSWORD: 'test'
+    ports:
+      - '3306:3306'
+networks:
+  appnet:

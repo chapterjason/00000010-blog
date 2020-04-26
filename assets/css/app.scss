@@ -1,0 +1,16 @@
+@import "custom";
+@import "~bootstrap/scss/bootstrap";
+
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+
+body {
+  padding-top: 4.5rem;
+}
+
+table tr td:last-child {
+  white-space: nowrap;
+  width: 1px;
+}
